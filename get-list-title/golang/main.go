@@ -81,12 +81,13 @@ func getListFromURL(url string, c *http.Client) (*GetListResponse, error) {
 		return nil, fmt.Errorf("status code was: %s", resp.Status)
 	}
 
+	// Read the body into a byte array
 	b, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, fmt.Errorf("failed reading the body response: %w", err)
 	}
 
-	// Unmarshal (convert) the json response into a GetListResponse struct
+	// Unmarshal (convert) the byte array into a GetListResponse struct
 	// that we can easily work with in golang
 	// Note that the variable is a pointer to a struct
 	// (ie. it points to the memory location of the struct rather than
