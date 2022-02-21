@@ -2,6 +2,13 @@
 
 An example of a simple golang command line tool which will get a list via the RL API and print out it's title to the screen.
 
+You will need to set two envvars in terminal, specifying your API credentials:
+
+```bash
+export ACTIVE_TALIS_PERSONA_ID="my-id"
+export ACTIVE_TALIS_PERSONA_SECRET="my-secret"
+```
+
 ```bash
 go run ./ -tenant broadminster -id 06C17A4C-4D2C-D974-A35A-E7C31EC70725 
 ```
