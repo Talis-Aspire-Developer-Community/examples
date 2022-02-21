@@ -9,6 +9,8 @@ export ACTIVE_TALIS_PERSONA_ID="my-id"
 export ACTIVE_TALIS_PERSONA_SECRET="my-secret"
 ```
 
+Then you can run the tool like this:
+
 ```bash
 go run ./ -tenant broadminster -id 06C17A4C-4D2C-D974-A35A-E7C31EC70725 
 ```
