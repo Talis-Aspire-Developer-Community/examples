@@ -58,17 +58,17 @@ func main() {
 
 	// Get the list from the URL
 	url := fmt.Sprintf("https://rl.talis.com/3/%s/lists/%s", tenant, listID)
-	l, err := getListFromURL(url, c)
+	listResp, err := getListRespFromURL(url, c)
 	if err != nil {
 		log.Fatal(fmt.Errorf("faild to get the list data: %w", err))
 	}
 
 	// Now we have the data in a struct, we can print out the title
-	title := l.Data.Attr.Title
+	title := listResp.Data.Attr.Title
 	fmt.Println(title)
 }
 
-func getListFromURL(url string, c *http.Client) (*GetListResponse, error) {
+func getListRespFromURL(url string, c *http.Client) (*GetListResponse, error) {
 	// Call the built URL to get the list details
 	resp, err := c.Get(url)
 	if err != nil {
