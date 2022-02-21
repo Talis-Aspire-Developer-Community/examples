@@ -35,7 +35,6 @@ type GetListResponseDataAttributes struct {
 	Title string `json:"title"`
 }
 
-// main is the point of entry for this tool
 func main() {
 	// The list ID and tenant shortcode values are retrieved from the
 	// parameters passed when running this tool
@@ -57,45 +56,33 @@ func main() {
 	// and will automatically refresh the token if it expires
 	c := getClient(personaID, personaSecret, personaURL)
 
-	// Build the URL for the API Get Lists endpoint, based on the list ID and tenant shortcode
+	// Get the list from the URL
 	url := fmt.Sprintf("https://rl.talis.com/3/%s/lists/%s", tenant, listID)
-
 	l, err := getListFromURL(url, c)
 	if err != nil {
-		// If something went wrong getting the list data
-		// then quit out and print the error to the screen
 		log.Fatal(fmt.Errorf("faild to get the list data: %w", err))
 	}
 
-	// Now we have the data correctly unmarshalled, we can print out the title
+	// Now we have the data in a struct, we can print out the title
 	title := l.Data.Attr.Title
 	fmt.Println(title)
 }
 
-// getListFromURL will take a url and an http client and will return the list response
 func getListFromURL(url string, c *http.Client) (*GetListResponse, error) {
 	// Call the built URL to get the list details
 	resp, err := c.Get(url)
 	if err != nil {
-		// If something went wrong retrieving the list data
-		// then quit out and print the error to the screen
 		return nil, fmt.Errorf("get call to retrieve the list failed: %w", err)
 	}
-	// We must make sure the response body is closed when this
-	// function ends
 	defer resp.Body.Close()
 
 	// Check that we got a 200 OK status response from the API
 	if resp.StatusCode != http.StatusOK {
-		// If we did not get an "OK" status code in the response
-		// then quit out and print the error to the screen
 		return nil, fmt.Errorf("status code was: %s", resp.Status)
 	}
 
 	b, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		// If something went wrong reading the body
-		// then quit out and print the error to the screen
 		return nil, fmt.Errorf("failed reading the body response: %w", err)
 	}
 
@@ -106,17 +93,11 @@ func getListFromURL(url string, c *http.Client) (*GetListResponse, error) {
 	// being the struct itself)
 	l := &GetListResponse{}
 	if err = json.Unmarshal(b, l); err != nil {
-		// If something went wrong unmarshalling
-		// then quit out and print the error to the screen
 		return nil, fmt.Errorf("failed to unmarshal json response: %w", err)
 	}
-
-	// All is good, so return list with a 'nil' error
 	return l, nil
 }
 
-// getClient will return an http client with the oauth
-// credentials baked in
 func getClient(ID, secret, url string) *http.Client {
 	c := clientcredentials.Config{
 		ClientID:     ID,
