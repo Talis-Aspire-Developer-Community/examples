@@ -79,8 +79,13 @@ func iterateAndWrite(in io.Reader, out io.Writer, tenant string, c *http.Client)
 		}
 		listID := record[0]
 
+		a := &listapi.Client{
+			BaseURL:    "http://tenant-test.ac.uk",
+			TenantCode: tenant,
+			Client:     c,
+		}
 		// Get the list from the URL
-		listResp, err := listapi.Get(tenant, listID, c)
+		listResp, err := a.Get(listID)
 		if err != nil {
 			return fmt.Errorf("failed to get the list data: %w", err)
 		}

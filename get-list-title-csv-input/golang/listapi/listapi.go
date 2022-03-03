@@ -29,13 +29,19 @@ type GetResponseDataAttributes struct {
 	Title string `json:"title"`
 }
 
+type Client struct {
+	BaseURL    string
+	TenantCode string
+	Client     *http.Client
+}
+
 // Get the list api response
-func Get(tenant, listID string, c *http.Client) (*GetResponse, error) {
+func (a *Client) Get(listID string) (*GetResponse, error) {
 	// Build the URL we want to call
-	url := fmt.Sprintf("https://rl.talis.com/3/%s/lists/%s", tenant, listID)
+	url := fmt.Sprintf("%s/3/%s/lists/%s", a.BaseURL, a.TenantCode, listID)
 
 	// Call the built URL to get the list details
-	resp, err := c.Get(url)
+	resp, err := a.Client.Get(url)
 	if err != nil {
 		return nil, fmt.Errorf("get call to retrieve the list failed: %w", err)
 	}
