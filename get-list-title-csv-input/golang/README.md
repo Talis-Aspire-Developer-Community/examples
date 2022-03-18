@@ -15,5 +15,5 @@ Then you can run the tool like this:
 go run ./ -tenant broadminster -infile input.csv -outfile ./test/out.csv
 ```
 
-If you are trying to use this example for a Canadian tenancy you will need to modify both the persona token URL and the RL API Base URL in the code,
+If you are trying to use this example for a Canadian 🇨🇦  tenancy you will need to modify both the persona token URL and the RL API Base URL in the code,
 as this example presumes the use of the non-canadian urls.
