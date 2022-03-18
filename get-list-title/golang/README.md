@@ -15,5 +15,5 @@ Then you can run the tool like this:
 go run ./ -tenant broadminster -id 06C17A4C-4D2C-D974-A35A-E7C31EC70725 
 ```
 
-:canada:If you are trying to use this example for a Canadian tenancy you will need to modify both the persona token URL and the RL API Base URL in the code,
+:canada: If you are trying to use this example for a Canadian tenancy you will need to modify both the persona token URL and the RL API Base URL in the code,
 as this example presumes the use of the non-canadian urls.
