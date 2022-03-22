@@ -1,6 +1,6 @@
 module github.com/Talis-Aspire-Developer-Community/examples/get-list-title-csv-input/golang
 
-go 1.17
+go 1.18
 
 require (
 	github.com/gorilla/mux v1.8.0
