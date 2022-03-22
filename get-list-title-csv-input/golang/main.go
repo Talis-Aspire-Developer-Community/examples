@@ -80,7 +80,7 @@ func iterateAndWrite(in io.Reader, out io.Writer, tenant string, c *http.Client)
 		listID := record[0]
 
 		a := &listapi.Client{
-			BaseURL:    "http://tenant-test.ac.uk",
+			BaseURL:    "https://rl.talis.com",
 			TenantCode: tenant,
 			Client:     c,
 		}
